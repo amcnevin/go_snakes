@@ -17,9 +17,12 @@ type Game struct {
 	difficulty int
 }
 
+// initiate the game
 func initGame(d int) Game {
 	var x int
 	var y int
+
+	// difficulty config
 	if d == 1 {
 		x = 20
 		y = 20
@@ -41,6 +44,7 @@ func initGame(d int) Game {
 		int(d)}
 }
 
+// Clock tick on the game
 func tick(game *Game) {
 	if isAlive(game.snake) {
 		// move the snake
@@ -49,10 +53,10 @@ func tick(game *Game) {
 		didSnakeEatCookie(&game.snake, &game.cookie, &game.score)
 		// did the snake die?
 		didSnakeDie(&game.board, &game.snake)
-
 	}
 }
 
+// obtain the direction from the user
 func getUserInput(game *Game, halt chan bool) {
 
 	err := keyboard.Open()
@@ -92,10 +96,12 @@ func getUserInput(game *Game, halt chan bool) {
 	}
 }
 
+// Game Over Man, Game Over
 func isGameOver(game Game) bool {
 	return !isAlive(game.snake)
 }
 
+// Print the Game Board
 func print(game Game) {
 	c := exec.Command("clear")
 	c.Stdout = os.Stdout

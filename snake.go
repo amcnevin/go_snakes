@@ -22,6 +22,7 @@ type Snake struct {
 	bearing Bearing
 }
 
+// build new Snake
 func newSnake() Snake {
 	snake := Snake{}
 	snake.bearing = East
@@ -31,6 +32,7 @@ func newSnake() Snake {
 	return snake
 }
 
+// Move the Snake according to its bearing
 func move(snake *Snake) {
 
 	if isAlive(*snake) {
@@ -47,6 +49,7 @@ func move(snake *Snake) {
 		default:
 
 		}
+		// grow the snake if needed		
 		growSnake(snake, snake.xPos, snake.yPos)
 		// pop off the body
 		if len(snake.body) > 1 {
@@ -55,6 +58,7 @@ func move(snake *Snake) {
 	}
 }
 
+// is the Snake at a particular position
 func isSnakeAt(snake Snake, x int, y int) bool {
 	if snake.xPos == x && snake.yPos == y {
 		return true
@@ -69,6 +73,7 @@ func isSnakeAt(snake Snake, x int, y int) bool {
 	return false
 }
 
+// did the snake occupy the same coordinate at the cookie
 func didSnakeEatCookie(snake *Snake, cookie *Cookie, score *Score) {
 	// are snake and cookie at same spot?
 	if snake.xPos == cookie.xPos && snake.yPos == cookie.yPos {
@@ -79,38 +84,38 @@ func didSnakeEatCookie(snake *Snake, cookie *Cookie, score *Score) {
 	}
 }
 
+// grow the snake at a particular coordinate
 func growSnake(snake *Snake, x int, y int) {
 	coord := Coord{x, y}
 	snake.body = append(snake.body, coord)
 
 }
 
+// is the snake not dead yet
 func isAlive(snake Snake) bool {
 	return snake.alive
 }
 
+// change the snakes bearing
 func changeBearing(snake *Snake, bearing Bearing) {
-
 	currentBearing := snake.bearing
+	// don't allow the snake to travel in opposite direction
 	if currentBearing == North && bearing == South {
 		return
 	}
-
 	if currentBearing == South && bearing == North {
 		return
 	}
-
 	if currentBearing == East && bearing == West {
 		return
 	}
-
 	if currentBearing == West && bearing == East {
 		return
 	}
-
 	snake.bearing = bearing
 }
 
+// check to determine if the snake has died
 func didSnakeDie(board *Board, snake *Snake) bool {
 	// did snake hit wall?
 	if board.x <= snake.xPos || 0 > snake.xPos {

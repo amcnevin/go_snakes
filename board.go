@@ -12,6 +12,7 @@ type Coord struct {
 	y int
 }
 
+// Instantiate a new board with provided dimensions
 func newBoard(x int, y int) Board {
 	return Board{x, y}
 }

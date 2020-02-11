@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// Main Entry point
 func main() {
 
 	printBanner()
@@ -51,11 +52,13 @@ func main() {
 
 }
 
+// Print Starting Banner
 func printBanner() {
 	fmt.Println("GO SNAKES")
 	fmt.Println("Select Difficulty")
 }
 
+// Print Difficulty Choices
 func printChoices() {
 	fmt.Println("1 - Easy")
 	fmt.Println("2 - Medium")
